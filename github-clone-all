@@ -1,0 +1,22 @@
+#!/bin/bash
+# github-clone-all 2024-07-31
+# Clones all github authors non forked repos.
+# Note: author is part of the url. ie: 'Cody-Learner' from 'https://github.com/Cody-Learner'
+# Usage: github-clone-all [author]
+
+set -euo pipefail
+
+if	! which curl jq git xargs &>/dev/null; then								# Check/install deps
+	printf '\f%s\f\n' "${BC} Checking/Installing missing dependencies. ${OFF}"
+	sudo pacman -S --needed which curl jq git findutils
+fi
+
+author="${1-}"
+
+	curl -s "https://api.github.com/users/${author}/repos?per_page=100" |
+	jq -r '.[] | select(.fork == false) |
+	select(.name).clone_url' |
+	xargs -L1 git clone
+
+
+
