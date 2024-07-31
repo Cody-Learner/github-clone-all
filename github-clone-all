@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-if	! which curl jq git xargs &>/dev/null; then								# Check/install deps
+if	! which curl jq git xargs &>/dev/null; then							# Check/install deps
 	printf '\f%s\f\n' "${BC} Checking/Installing missing dependencies. ${OFF}"
 	sudo pacman -S --needed which curl jq git findutils
 fi
