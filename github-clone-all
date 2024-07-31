@@ -1,15 +1,20 @@
 #!/bin/bash
 # github-clone-all 2024-07-31
 # Clones all github authors non forked repos.
-# URL ie: https://github.com/Cody-Learner'
-
-# Usage ie: github-clone-all Cody-Learner
+# Usage ie: github-clone-all [author]
+# URL ie: author 'Cody-Learner' of https://github.com/Cody-Learner'
 
 set -euo pipefail
 
 BC=$(tput bold; tput setaf 6)
 OFF=$(tput sgr0)
 author="${1-}"
+
+if	[[ ! -v 1 ]]; then									# Print message if
+	printf '\f%s\n' "${BC}  Usage:${OFF} github-clone-all [author]"				# missing argument
+	printf '%s\f\n' "${BC}  ie   :${OFF} github-clone-all Cody-Learner"
+	exit
+fi
 
 if	! which curl jq git xargs &>/dev/null; then						# Check/install deps
 	printf '\f%s\f\n' "${BC}  Checking/Installing missing dependencies. ${OFF}"
