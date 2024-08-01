@@ -2,7 +2,7 @@
 # github-clone-all 2024-07-31
 # Clones all github authors non forked repos.
 # Usage ie: github-clone-all [author]
-# URL ie: author 'Cody-Learner' of https://github.com/Cody-Learner'
+# URL ie: author 'Cody-Learner' of https://github.com/Cody-Learner
 
 set -euo pipefail
 

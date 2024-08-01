@@ -1,4 +1,15 @@
 # github-clone-all											<br>
-Clones all github authors non forked repos in pwd.							<br>
+Clones all github [author]s non forked or archived repos in pwd.					<br>
 Usage: github-clone-all [author]									<br>
-Note: author is part of the url. ie: 'Cody-Learner' from 'https://github.com/Cody-Learner'		<br>
+Note: [author] is part of the url. ie: 'Cody-Learner' from https://github.com/Cody-Learner		<br>
+													<br>
+### To fetch the script:										<br>
+
+Using either `wget` or `curl` and either URL:								<br>
+													<br>
+`curl -O https://raw.githubusercontent.com/Cody-Learner/github-clone-all/main/github-clone-all`		<br>
+													<br>
+`wget https://tinyurl.com/cody-clone-all`								<br>
+													<br>
+Then set the x bit: `chown +x github-clone-all`								<br>
+													<br>
