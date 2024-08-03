@@ -1,5 +1,5 @@
 #!/bin/bash
-# github-clone-all 2024-08-02
+# github-ca 2024-08-02
 # Dependencies: curl jq git findutils bash coreutils ncurses sudo
 # Clones all github authors non forked or archived repos.
 
@@ -14,8 +14,8 @@ instdir="/usr/local/bin/"				# Scripts installed into this directory.
 
 usage(){
 	printf '\f%s\n' "${BC} Usage: github-clone-all [-D author] [-I /path/repos-dir] ${OFF}"
-	printf '%s\n'   "${BC} IE download:  github-clone-all -D Cody-Learner ${OFF}"
-	printf '%s\f\n' "${BC} IE install :  github-clone-all -I ~/GitHub.XXX ${OFF}"
+	printf '%s\n'   "${BC} IE download:  github-ca -D Cody-Learner ${OFF}"
+	printf '%s\f\n' "${BC} IE install :  github-ca -I ~/GitHub.XXX ${OFF}"
 	exit
 }
 
@@ -37,7 +37,7 @@ fi
 	xargs -L1 git clone
 
 	printf '\f%s\n' "${BC} Downloaded repos location: ${downloaddir} ${BC}"
-	printf '%s\f\n' "${BC} To install:${BC} github-clone-all -I ~/${downloaddir}"
+	printf '%s\f\n' "${BC} To install:${BC} github-ca -I ${downloaddir}"
 }
 
 install(){
