@@ -45,7 +45,7 @@ install(){
 	rm -f /tmp/scripts
 	rm -f /tmp/scripts2
 
-	#  Reversed the logic on the following two if statements with 'break'.
+	#  Reversed the logic on the following two if statements with ':'.
 	#  Using '!' + 'set -eou pipefail', the script exits before message is printed.
 
 if	find "${repopath}" -maxdepth 0 -type d &>/dev/null; then
