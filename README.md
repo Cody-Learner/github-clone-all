@@ -11,7 +11,7 @@ Using either `wget` or `curl` and either URL:								<br>
 													<br>
 `wget https://tinyurl.com/github-ca`									<br>
 													<br>
-Check the script integrity, run: `sha256sum github-ca.sh' -OR-	'sha256sum github-ca`			<br>
+Check the script integrity, run: `sha256sum github-ca.sh` -OR-	`sha256sum github-ca`			<br>
 `0e9dd681007170cc7a06beb89fc9bb9d6d5c2f6a3ac36b17a65875b1b14ba16c`  github-ca.sh -OR- github-ca		<br>
 													<br>
 Then set the x bit: `chmod +x github-ca.sh` -OR- `chmod +x github-ca`					<br>
