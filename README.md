@@ -11,5 +11,5 @@ Using either `wget` or `curl` and either URL:								<br>
 													<br>
 `wget https://tinyurl.com/github-ca`									<br>
 													<br>
-Then set the x bit: `chmod +x github-ca.sh` -OR- `chown +x github-ca`					<br>
+Then set the x bit: `chmod +x github-ca.sh` -OR- `chmod +x github-ca`					<br>
 													<br>
