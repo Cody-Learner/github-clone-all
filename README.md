@@ -9,7 +9,7 @@ Using either `wget` or `curl` and either URL:								<br>
 													<br>
 `curl -O https://raw.githubusercontent.com/Cody-Learner/github-clone-all/main/github-ca.sh`		<br>
 													<br>
-`wget https://tinyurl.com/github-ca.sh`									<br>
+`wget https://tinyurl.com/github-ca`									<br>
 													<br>
-Then set the x bit: `chown +x github-ca.sh`								<br>
+Then set the x bit: `chown +x github-ca.sh` -OR- `chown +x github-ca`					<br>
 													<br>
