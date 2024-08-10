@@ -8,15 +8,12 @@ Note: [author] is part of the url. ie: 'Cody-Learner' from https://github.com/Co
 *"Cody specific option:"* `-R`  Runs 'install scripts' with *.inst suffix.				<br>
 													<br>
 **Fetch/Use without git:**										<br>
-Using either `wget` or `curl` and either URL:								<br>
-													<br>
 `curl -O https://raw.githubusercontent.com/Cody-Learner/github-clone-all/main/github-ca.sh`		<br>
-`wget https://tinyurl.com/github-ca`									<br>
 													<br>
-Check the script integrity, run: `sha256sum github-ca*`							<br>
+Check the script integrity, run: `sha256sum github-ca.sh`						<br>
 sha256sum: `a8045eca6d1843ec9d89556c18351b41f03f844f3c15243cac9594739802f950`				<br>
 													<br>
-Set the x bit: `chmod +x github-ca*`									<br>
+Set the x bit: `chmod +x github-ca.sh`									<br>
 													<br>
-To run: `./github-ca.sh` or `./github-ca`								<br>
+To run: `./github-ca.sh`										<br>
 													<br>
