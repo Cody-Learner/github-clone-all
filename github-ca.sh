@@ -1,5 +1,5 @@
 #!/bin/bash
-# github-ca 2024-08-09
+# github-ca 2024-08-10
 # Dependencies: curl jq git findutils bash coreutils ncurses sudo
 # Clones all github authors non forked or archived repos.
 # Optionally, copies scripts ( *.sh) to 'instdir' and creates symlinks without the .sh ie: coolscript -> coolscript.sh
@@ -18,10 +18,10 @@ printf '%s\n' "${downloaddir}" >/tmp/downloaddir
 usage(){
 	printf '\f%s\f\n' " Usage: github-ca.sh [-D author] [-I /path/repos-dir] [-R /path/repos-dir]"
 	printf '%s\n'   " -D = Download 'clone' github repos"
-	printf '%s\f\n'	" -I = Install '*.sh' to variable 'instdir' set to: ${instdir}"
+	printf '%s\n'	" -I = Install '*.sh' to variable 'instdir' set to: ${instdir}"
 	printf '%s\f\n'	" -R = Run install script '*.inst' for repos having it."
 	printf '%s\n'   " IE Download          :  ./github-ca.sh -D Cody-Learner"
-	printf '%s\f\n'	" IE Install           :  ./github-ca.sh -I ~/GitHub.XXX"
+	printf '%s\n'	" IE Install           :  ./github-ca.sh -I ~/GitHub.XXX"
 	printf '%s\f\n'	" IE Run install script:  ./github-ca.sh -R ~/GitHub.XXX"
 	[[ -s  /tmp/downloaddir ]] &&
 	printf '%s\f\n' " Download directory: ${downloaddir}"
