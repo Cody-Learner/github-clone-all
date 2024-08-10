@@ -1,10 +1,11 @@
 # github-clone-all											<br>
-Clones all github [author]s non forked or archived repos in pwd.					<br>
+Clones all github [author] non forked or archived repos.						<br>
 Note: [author] is part of the url. ie: 'Cody-Learner' from https://github.com/Cody-Learner		<br>
 													<br>
 **Usage:**												<br>
-*"Generic github"* `github-clone-all -D` [author]							<br>
-*"Cody specific"* `-I` option:  Installs Cody's scripts with .sh suffix.				<br>
+*"Generic option      :"* `-D`  github-clone-all ` [author]						<br>
+*"Cody specific option:"* `-I`  Copy scripts with *.sh suffix to `instdir` directory.			<br>
+*"Cody specific option:"* `-R`  Runs 'install scripts' with *.inst suffix.				<br>
 													<br>
 **Fetch/Use without git:**										<br>
 Using either `wget` or `curl` and either URL:								<br>
