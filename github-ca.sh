@@ -1,35 +1,39 @@
 #!/bin/bash
-# github-ca 2024-08-10
+# github-ca 2024-08-30
 # Dependencies: curl jq git findutils bash coreutils ncurses sudo
 # Clones all github authors non forked or archived repos.
 # Optionally, copies scripts ( *.sh) to 'instdir' and creates symlinks without the .sh ie: coolscript -> coolscript.sh
-# Optionally, runs install script ( *.inst) for repos having it.
+# Optionally, runs config script ( *.inst) for repos having it.
 
 set -euo pipefail
 
 author=${2-}
 repopath=${2-}
-instdir="/usr/local/bin/"							# Scripts installed into this directory.
+instdir="/usr/local/bin/"
+B=$(tput bold)
+O=$(tput sgr0)
+					# Scripts installed into this directory.
+
 [[ -s  /tmp/downloaddir ]] && downloaddir=$(cat /tmp/downloaddir)		# Do not edit this line.
 [[ ! -v downloaddir ]] && downloaddir=$(mktemp -d "${HOME}"/GitHub.XXX)		# GitHub repos downloaded to this directory.
 
 printf '%s\n' "${downloaddir}" >/tmp/downloaddir
 
 usage(){
-	printf '\f%s\f\n' " Usage: github-ca.sh [-D author] [-I /path/repos-dir] [-R /path/repos-dir]"
+	printf '\n%s\n\n' " Usage: github-ca.sh [-D author] [-I /path/repos-dir] [-C /path/repos-dir]"
 	printf '%s\n'   " -D = Download 'clone' github repos"
 	printf '%s\n'	" -I = Install '*.sh' to variable 'instdir' set to: ${instdir}"
-	printf '%s\f\n'	" -R = Run install script '*.inst' for repos having it."
+	printf '%s\n\n'	" -C = Run config scripts '*.inst' for repos having it."
 	printf '%s\n'   " IE Download          :  ./github-ca.sh -D Cody-Learner"
-	printf '%s\n'	" IE Install           :  ./github-ca.sh -I ~/GitHub.XXX"
-	printf '%s\f\n'	" IE Run install script:  ./github-ca.sh -R ~/GitHub.XXX"
+	printf '%s\n'	" IE Install           :  ./github-ca.sh -I ${downloaddir}"
+	printf '%s\n\n'	" IE Run config script :  ./github-ca.sh -C ${downloaddir}"
 	[[ -s  /tmp/downloaddir ]] &&
-	printf '%s\f\n' " Download directory: ${downloaddir}"
+	printf '%s\n\n' " Download directory: ${downloaddir}"
 	exit
 }
 
 if	! type curl jq git xargs bash printf tput sudo git &>/dev/null; then
-	printf '\f%s\f\n' " Checking/Installing missing dependencies with pacman."
+	printf '\n%s\n\n' " Checking/Installing missing dependencies with pacman."
 	sudo pacman -S --needed which curl jq git findutils bash coreutils ncurses sudo
 fi
 
@@ -37,15 +41,15 @@ download(){
 
 	cd "${downloaddir}"
 
-	printf '\f%s\f\n' " Cloning repos...."
+	printf '\n%s\n\n' " Cloning repos...."
 
 	curl -s "https://api.github.com/users/${author}/repos?per_page=100" |
 	jq -r '.[] | select(.fork == false) |
 	select(.name).clone_url' |
 	xargs -L1 git clone
 
-	printf '\f%s\n' " Downloaded repos location: ${downloaddir}"
-	printf '%s\f\n' " To install: ./github-ca -I ${downloaddir}"
+	printf '\n%s\n' "${B} Downloaded repos location:${O} ${downloaddir}"
+	printf '%s\n\n' "${B} To install:${O} ./github-ca.sh -I ${downloaddir}"
 }
 
 install(){
@@ -59,7 +63,7 @@ install(){
 if	find "${repopath}" -maxdepth 0 -type d &>/dev/null; then
 	:
    else
-	printf '\f%s\f\n'	" Repo path ${repopath} does not exist."
+	printf '\n%s\n\n'	" Repo path ${repopath} does not exist."
 	exit
 fi
 	cd "${repopath}"
@@ -67,7 +71,7 @@ fi
 if	find -- * -maxdepth 0 -maxdepth 0 -type d &>/dev/null; then
 	:
     else
-	printf '\f%s\f\n' " The directory ${repopath} is empty."
+	printf '\n%s\n\n' " The directory ${repopath} is empty."
 	exit
 fi
 
@@ -89,16 +93,18 @@ while	read -r scripts; do
 	ls -la "${instdir}${scripts:0:-3}" >>/tmp/scripts2
 done </tmp/scripts
 
-	printf '\f%s\n' " Copied the following list of scripts into ${instdir}"
-	printf '%s\f\n' " Re/set owner:group metadata of scripts to $(id -un):$(id -gn)"
+	printf '\n%s\n' "${B} Copied the following list of scripts into:${O} ${instdir}"
+	printf '%s\n\n' "${B} Set scripts owner:group to: $(id -un):$(id -gn) and created symlinks listed below.${O}"
 
 	sed -e 's/^/  /' /tmp/scripts
 
 	echo
 	column -t /tmp/scripts2 | sed -e 's/^/  /'
+
+	printf '\n%s\n\n' "${B} To run configuration scripts:${O} ./github-ca.sh -C ${downloaddir}"
 }
 
-run_inst(){
+run_config(){
 
 	cd "${repopath}"
 
@@ -110,7 +116,7 @@ for	directories in "${repopath}"/* ; do
 
 	if	[[ -n ${script} ]]; then
 		./"${script}"
-		printf '\f%s\f\n' "#==================================================================#"
+		printf '\n%s\n\n' "${B}#==================================================================#${O}"
 	fi
 done
 
@@ -121,7 +127,7 @@ while :; do
 	case "${1-}" in
 	-D |--download)	download 			;;
 	-I |--install)	install 			;;
-	-R |--runins)   run_inst			;;
+	-C |--conf)   run_config			;;
 	-?*)		echo " Input Error."; usage	;;
 	*)		break
         esac
